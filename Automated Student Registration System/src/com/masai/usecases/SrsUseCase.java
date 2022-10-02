@@ -1,18 +1,25 @@
 package com.masai.usecases;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.masai.bean.Course;
+import com.masai.bean.CourseDTO;
+import com.masai.bean.StudentDTO;
+import com.masai.dao.AdminDao;
 import com.masai.dao.StudentDao;
 import com.masai.dao.StudentDaoImpl;
+import com.masai.dao.AdminDaoImpl;
 import com.masai.exceptions.CourseException;
+import com.masai.exceptions.StudentException;
 
-public class Srs {
+public class SrsUseCase {
 	
 	static Scanner sc = new Scanner(System.in); 
 	
-	//teenoo ke liye alag method bnana
-	static StudentDao dao = new StudentDaoImpl();
+	static AdminDao dao = new AdminDaoImpl();
+	
+	static StudentDao dao2 = new StudentDaoImpl();
 	
 	public static void selectOption() {
 		
@@ -21,7 +28,7 @@ public class Srs {
 		
 		int option = sc.nextInt();
 		
-		while(option != 4) {
+		while(option != 5) {
 			
 			//here choice based admin ke liye sare switch cases n fir user ke n ek register ka
 			
@@ -29,7 +36,6 @@ public class Srs {
 				//Admin functionality ke andar agye n ab switch case dalo
 				System.out.println("Welcome to Admin Panel");
 				adminPanel();
-			
 				
 				//choice = sc.nextInt();
 		        
@@ -45,7 +51,8 @@ public class Srs {
 			    registerStudent();
 			}
 			else if(option == 4) {
-			    return;	
+			    System.out.println("Thank you for using the Student Registration System");
+				break;
 			}
 			
 		}
@@ -158,16 +165,35 @@ public class Srs {
 				 
 			     adminPanel(); 
 				  
-			  case 7:  
+			  case 7:
+				 System.out.println("Enter the new total seats for batch:");
+				 int totalCount2 = sc.nextInt();
+				 
+				 System.out.println("Enter the batch name for total seat updation:");
+				 String bname3 = sc.next(); 
+				 
+				 String result6 = dao.updateTotalSeats(totalCount2, bname3);
 			     
+				 System.out.println(result6);
+				 
 				 adminPanel(); 
 				 
 			  case 8:   
+				 try {
+					
+				    List<StudentDTO> dtos = dao.viewStudentsOfAllBatch();
+					
+					dtos.forEach(dto -> System.out.println(dto));
+					
+				 } 
+				 catch (StudentException e) {
+					System.out.println(e.getMessage());
+				 }
 				     
 				 adminPanel(); 	 
 			     
 			  case 9:
-				 Srs.selectOption();   
+				 SrsUseCase.selectOption();   
 				 break;
 				
 			  default:
@@ -187,12 +213,67 @@ public class Srs {
 		switch(choice) {
     	 
 		  case 1:
-			 System.out.println("Enter the username and password"); 
+			 System.out.println("Enter Username:");
+			 String uname = sc.next();
+				
+			 System.out.println("Enter Password:");
+			 String password = sc.next();
+			 
+			 System.out.println("Enter the Course name to register:");
+			 String cname = sc.next();
+			 
+			 try {
+				
+				String result = dao2.registerStudentInCourse(uname, password, cname);
+				
+				System.out.println(result);
+				
+			 } 
+			 catch (StudentException e) {
+				System.out.println(e.getMessage());
+			 }
 			 
 			 studentPanel();
 		
-		  case 6:
-			 Srs.selectOption();
+		  case 2:
+			 System.out.println("Enter Username:");
+			 String uname2 = sc.next();
+					
+			 System.out.println("Enter Password:");
+			 String password2 = sc.next();
+				 
+			 System.out.println("Enter the Course name to register:");
+			 String cname2 = sc.next();
+			 
+			 try {
+				 
+				String result2 = dao2.updateCourse(uname2, password2, cname2);
+				
+				System.out.println(result2);
+				
+			 } 
+			 catch (StudentException e) {
+				System.out.println(e.getMessage());
+			 }
+			  
+			 studentPanel(); 
+			 
+		  case 3:
+			 try {
+			    
+			   List<CourseDTO> dtoc = dao2.allCourseDetails();
+				
+			   dtoc.forEach(dto -> System.out.println(dto));
+				
+			 } 
+			 catch (CourseException e) {
+				System.out.println(e.getMessage());
+			 }
+			  
+			 studentPanel(); 
+			 
+		  case 4:
+			 SrsUseCase.selectOption();
 			 break;
 			 
 		  default:
@@ -204,6 +285,10 @@ public class Srs {
     }
     
     public static void registerStudent() {
+    	
+    	
+    	
+    	
     	
     }
     
