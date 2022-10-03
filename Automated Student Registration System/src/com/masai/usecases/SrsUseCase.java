@@ -3,13 +3,17 @@ package com.masai.usecases;
 import java.util.List;
 import java.util.Scanner;
 
+import com.masai.app.ExitApp;
 import com.masai.bean.Course;
 import com.masai.bean.CourseDTO;
+import com.masai.bean.Student;
 import com.masai.bean.StudentDTO;
 import com.masai.dao.AdminDao;
 import com.masai.dao.StudentDao;
 import com.masai.dao.StudentDaoImpl;
 import com.masai.dao.AdminDaoImpl;
+import com.masai.dao.RegisterStudentDao;
+import com.masai.dao.RegisterStudentDaoImpl;
 import com.masai.exceptions.CourseException;
 import com.masai.exceptions.StudentException;
 
@@ -21,6 +25,8 @@ public class SrsUseCase {
 	
 	static StudentDao dao2 = new StudentDaoImpl();
 	
+	static RegisterStudentDao dao3 = new RegisterStudentDaoImpl();
+	
 	public static void selectOption() {
 		
 		System.out.println("Select an option to Continue");
@@ -28,7 +34,7 @@ public class SrsUseCase {
 		
 		int option = sc.nextInt();
 		
-		while(option != 5) {
+		while(option < 5) {
 			
 			//here choice based admin ke liye sare switch cases n fir user ke n ek register ka
 			
@@ -36,23 +42,22 @@ public class SrsUseCase {
 				//Admin functionality ke andar agye n ab switch case dalo
 				System.out.println("Welcome to Admin Panel");
 				adminPanel();
-				
-				//choice = sc.nextInt();
-		        
-		      //Srs.selectOption(); in every case of switch
+				break;
 			}
 			else if(option == 2) {
 			    //Student panel functionality
 			    System.out.println("Welcome to Student Panel");
 			    studentPanel();		
+			    break;
 			}
 			else if(option == 3) {
-				System.out.println("Register as new Student");
+				System.out.println("Register as a new Student");
 			    registerStudent();
+			    break;
 			}
 			else if(option == 4) {
-			    System.out.println("Thank you for using the Student Registration System");
-				break;
+			    ExitApp.exit();
+			    break;
 			}
 			
 		}
@@ -83,6 +88,7 @@ public class SrsUseCase {
 				 System.out.println(result);
 				
 				 adminPanel();
+				 break;
 				
 			  case 2:
 				 System.out.println("Enter Fee:"); 
@@ -104,6 +110,7 @@ public class SrsUseCase {
 				 }
 				 
 				 adminPanel();
+				 break;
 				
 			  case 3:
 				 System.out.println("Enter Course Id:");
@@ -114,6 +121,7 @@ public class SrsUseCase {
 				 System.out.println();
 		
 				 adminPanel();
+				 break;
 				  
 			  case 4:
 				 System.out.println("Enter the Course Name:");
@@ -130,6 +138,7 @@ public class SrsUseCase {
 				 }
 				 
 				 adminPanel();
+				 break;
 				 
 			  case 5:  
 				 System.out.println("Enter the Batch Name to be added:");
@@ -150,6 +159,7 @@ public class SrsUseCase {
 				 System.out.println();
 				 
 				 adminPanel();
+				 break;
 				  
 			  case 6:
 				 System.out.println("Enter Student's roll no:");
@@ -164,6 +174,7 @@ public class SrsUseCase {
 				 System.out.println();
 				 
 			     adminPanel(); 
+			     break;
 				  
 			  case 7:
 				 System.out.println("Enter the new total seats for batch:");
@@ -177,6 +188,7 @@ public class SrsUseCase {
 				 System.out.println(result6);
 				 
 				 adminPanel(); 
+				 break;
 				 
 			  case 8:   
 				 try {
@@ -190,11 +202,12 @@ public class SrsUseCase {
 					System.out.println(e.getMessage());
 				 }
 				     
-				 adminPanel(); 	 
+				 adminPanel(); 
+				 break;
 			     
 			  case 9:
 				 SrsUseCase.selectOption();   
-				 break;
+				 break; 
 				
 			  default:
 				 adminPanel();
@@ -234,6 +247,7 @@ public class SrsUseCase {
 			 }
 			 
 			 studentPanel();
+			 break;
 		
 		  case 2:
 			 System.out.println("Enter Username:");
@@ -257,6 +271,7 @@ public class SrsUseCase {
 			 }
 			  
 			 studentPanel(); 
+			 break;
 			 
 		  case 3:
 			 try {
@@ -271,13 +286,14 @@ public class SrsUseCase {
 			 }
 			  
 			 studentPanel(); 
+			 break;
 			 
 		  case 4:
-			 SrsUseCase.selectOption();
+			 studentPanel(); 
 			 break;
 			 
 		  default:
-			 studentPanel(); 
+			 SrsUseCase.selectOption();
 			 break;
 		
 		}
@@ -286,13 +302,28 @@ public class SrsUseCase {
     
     public static void registerStudent() {
     	
-    	
-    	
-    	
+       System.out.println("Enter Student Name");
+	   String sname = sc.next();
+		
+	   System.out.println("Enter Student Marks");
+	   int marks = sc.nextInt();  
+	   System.out.println("Enter Student Email");
+	   String email = sc.next();
+                 
+	   System.out.println("Enter Student Password");
+	   String password = sc.next();
+    	                     
+       Student student = new Student(marks, sname, marks, email, password); 	          
+	  
+       String result = dao3.registerStudent(student);
+	  
+       System.out.println(result);
+       
+       SrsUseCase.selectOption();
+       
+       return;
     	
     }
-    
-		
-	
-
+   
+  
 }

@@ -141,7 +141,7 @@ public class StudentDaoImpl implements StudentDao{
 		   String bn = rs.getString("bname");
 		   int as = rs.getInt("avalSeats");
 		
-		   CourseDTO dto = new CourseDTO(cn, f, as);
+		   CourseDTO dto = new CourseDTO(cn,f,bn,as);
 		
 		   dtoc.add(dto);	
 		   

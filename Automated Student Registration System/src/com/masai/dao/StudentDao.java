@@ -19,5 +19,4 @@ public interface StudentDao {
 	//Student can see all the available course list and their seat availability ->
 	public List<CourseDTO> allCourseDetails() throws CourseException;
 	
-	
 }
