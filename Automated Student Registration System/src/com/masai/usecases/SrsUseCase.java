@@ -36,10 +36,8 @@ public class SrsUseCase {
 		
 		while(option < 5) {
 			
-			//here choice based admin ke liye sare switch cases n fir user ke n ek register ka
-			
 			if(option == 1) {
-				//Admin functionality ke andar agye n ab switch case dalo
+				//Admin panel functionality 
 				System.out.println("Welcome to Admin Panel");
 				adminPanel();
 				break;
@@ -71,7 +69,8 @@ public class SrsUseCase {
 					           +"\n5: Create Batch under a Course"
 			                   +"\n6: Allocate Students in a Batch under a Course"
 					           +"\n7: Update total seats of a Batch"
-			                   +"\n8: View the Students of every Batch");
+			                   +"\n8: View the Students of every Batch"
+					           +"\n9: Go Back to Main");
 			int choice = sc.nextInt();
 			
 			switch(choice) {
@@ -220,7 +219,8 @@ public class SrsUseCase {
     public static void studentPanel() {
     	System.out.println("Select an option to Continue");
     	System.out.println("1: Register in a Course"+"\n2: Update Course Allocation"
-    	                   +"\n3: All courses list and seat availability");
+    	                   +"\n3: All courses list and seat availability"
+    			           +"\n4: Go Back to Main");
     	int choice = sc.nextInt();
 		
 		switch(choice) {
@@ -289,11 +289,11 @@ public class SrsUseCase {
 			 break;
 			 
 		  case 4:
-			 studentPanel(); 
+			 SrsUseCase.selectOption();
 			 break;
 			 
 		  default:
-			 SrsUseCase.selectOption();
+			 studentPanel(); 
 			 break;
 		
 		}
