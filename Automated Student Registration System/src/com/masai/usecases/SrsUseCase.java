@@ -27,6 +27,14 @@ public class SrsUseCase {
 	
 	static RegisterStudentDao dao3 = new RegisterStudentDaoImpl();
 	
+	static String adminUserName = "Ratan";
+	static int adminPass = 1234;
+	
+	static String studentUserName = "Mayank";
+	static int studentPass = 4786;
+	
+	
+	
 	public static void selectOption() {
 		
 		System.out.println("Select an option to Continue");
@@ -37,16 +45,42 @@ public class SrsUseCase {
 		while(option < 5) {
 			
 			if(option == 1) {
+				
+			 System.out.println("Enter the Admin username");
+			 String uName = sc.next();
+			 
+			 System.out.println("Enter the Admin password");
+			 int pass = sc.nextInt();
+			 
+			 if(adminUserName.equalsIgnoreCase(uName) && adminPass==pass){
 				//Admin panel functionality 
 				System.out.println("Welcome to Admin Panel");
 				adminPanel();
 				break;
+			 }
+			 
+			 System.out.println("Wrong admin username or password");
+			 selectOption();
+			 
 			}
 			else if(option == 2) {
+					
+			  System.out.println("Enter the Admin username");
+			  String uName = sc.next();
+					 
+			  System.out.println("Enter the Admin password");
+			  int pass = sc.nextInt();
+					 
+			  if(studentUserName.equalsIgnoreCase(uName) && studentPass==pass){
 			    //Student panel functionality
 			    System.out.println("Welcome to Student Panel");
 			    studentPanel();		
 			    break;
+			  }
+			  
+			  System.out.println("Wrong student username or password");
+			  selectOption();
+			  
 			}
 			else if(option == 3) {
 				System.out.println("Register as a new Student");
