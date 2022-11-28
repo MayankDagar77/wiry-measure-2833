@@ -1,7 +1,7 @@
 # wiry-measure-2833
 # Automated Student Registration System
 
-In this project I have designed a course monitoring system using MySQL and JDBC driver along with java, here 4 tables is added i.e Batch, Faculty, Course, Course-Plan and with the help of these tables several operations is perfomed using Scanner class(By taking input from user) i.e, DYNAMICALLY. 
+In this project I have designed a automated student registration system using MySQL and JDBC driver along with java, here 4 tables is added i.e Batch, Faculty, Course, Course-Plan and with the help of these tables several operations is perfomed using Scanner class(By taking input from user) i.e, DYNAMICALLY. 
 
 The Admin has following responsiblities and rights to perform operations like:
 #
